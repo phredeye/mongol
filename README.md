@@ -2,6 +2,16 @@
 
 A RESTful Interface to MongoDB.
 
+*This is an experimental project that I hacked up in about 4 hours.  It is no where near even beta quality code. I hope to have time to flesh this out more later.*
+
+Future Plans:
+
+* API key based authentication
+* A more robust query interface
+* Content Negotiation to also support xml, serialized php, and html output based on accept headers and url file extensions.
+* Cross Origin support
+* Better Documentation
+
 ## Requirements
 
 * Apache

@@ -2,26 +2,21 @@
 
 $app->get("/:db/:collection", function($db, $collectionName) use ($app, $mongo) {
 	
-    $defaults = array(
-            "limit" => 10,
-            "skip" => 0
-    );
+	$data = array();
+	
+	$limit = (is_null($app->request->get('limit'))) ? 10 : $app->request->get('limit');
+	$skip = (is_null($app->request->get('skip'))) ? 10 : $app->request->get('skip');
+	
+	$query = $app->request->get();
+	
+    unset($query['limit']);
+    unset($query['skip']);
 
-    $params = array_merge($defaults, $app->request()->get());
-
-    $data = array('params'=>$params);
-
-    $limit = intval($params['limit']);
-    $skip = intval($params['skip']);
-
-    unset($params['limit']);
-    unset($params['skip']);
-
-    $db = $mongo->selectDB($db);
-    $collection = $db->selectCollection($collectionName);
-    $cursor = $collection->find($params)
-                    ->skip($skip)
-                    ->limit($limit);
+    $cursor = $mongo->selectDB($db)
+		->selectCollection($collectionName)
+		->find($query)
+        ->skip($skip)
+        ->limit($limit);
 
     $data[$collectionName] = array();
     foreach($cursor as $doc) {
