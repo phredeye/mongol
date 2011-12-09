@@ -11,6 +11,7 @@ Future Plans:
 * A more robust query interface
 * Content Negotiation to also support xml, serialized php, and html output based on accept headers and url file extensions.
 * Cross Origin support
+* Unit Tests
 * Better Documentation
 
 ## Requirements
