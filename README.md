@@ -6,6 +6,7 @@ A RESTful Interface to MongoDB.
 
 Future Plans:
 
+* Accept json input from raw body
 * API key based authentication
 * A more robust query interface
 * Content Negotiation to also support xml, serialized php, and html output based on accept headers and url file extensions.
