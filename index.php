@@ -1,22 +1,18 @@
 <?php
-
 require_once("lib/Slim/Slim.php");
 
-//With default settings
+//Bootstrap Slim with default settings
 $app = new Slim(array(
-            'log.enable' => true,
-            'log.path' => './logs',
-            'log.level' => 4
-        ));
+    'log.enable' => true,
+    'log.path' => './logs',
+    'log.level' => 4
+));
 
+// Instanciate mongo connection
 $mongo = new Mongo();
 
-$app->get("/", function() use ($app) {
-    $app->render("home.phtml");
-});
-
-$iterator = new DirectoryIterator(dirname(__FILE__) . "/routes");
-foreach ($iterator as $fileInfo) {
+// Load Route Files
+foreach (new DirectoryIterator(dirname(__FILE__) . "/routes") as $fileInfo) {
     if ($fileInfo->isFile()) {
         $fileName = $fileInfo->getFileName();
         $importFile = sprintf("routes/%s", $fileName);
@@ -24,6 +20,5 @@ foreach ($iterator as $fileInfo) {
     }
 }
 
-
-
+// dispatch routes
 $app->run();
